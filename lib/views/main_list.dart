@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nikusiowo/views/add_task_dialog.dart';
 import 'package:nikusiowo/widgets/circle_avatar.dart';
 import 'package:collection/collection.dart';
-import 'package:nikusiowo/widgets/task_list.dart';
 
 import '../models/task.dart';
 import '../widgets/task_tile.dart';
@@ -17,7 +16,8 @@ class MainListView extends ConsumerWidget {
         data: (data) => groupBy((data), (task) => task.type),
         error: (error, stackTrace) => {},
         loading: () => {});
-    final groupKeys = tasksGrouped.keys.toList()..sort((a,b) => taskTypes[a]!.compareTo(taskTypes[b]!));
+    final groupKeys = tasksGrouped.keys.toList()
+      ..sort((a, b) => taskTypes[a]!.compareTo(taskTypes[b]!));
     return Scaffold(
       appBar: AppBar(
         title: const Text("Nikusiowo"),
@@ -34,7 +34,7 @@ class MainListView extends ConsumerWidget {
         children: <Widget>[
           Expanded(
             child: ListView.builder(
-              itemCount: groupKeys.length+1,
+              itemCount: groupKeys.length + 1,
               padding: const EdgeInsets.all(8),
               itemBuilder: (context, index) {
                 if (index == 0) {
@@ -44,13 +44,16 @@ class MainListView extends ConsumerWidget {
                     width: 125.0,
                   );
                 }
-                final groupKey = groupKeys[index-1];
+                final groupKey = groupKeys[index - 1];
                 return ExpansionTile(
                   initiallyExpanded: true,
                   title: Text(groupKey),
-                  children: <Widget>[
-                    TaskList(tasksGrouped[groupKey]),
-                  ],
+                  children: (tasksGrouped[groupKey] as List<Task>)
+                      .map((Task task) => TaskTile(
+                          taskData: task,
+                          avatar:
+                              Avatar(16, who: task.who, taskName: task.name)))
+                      .toList(),
                 );
               },
             ),
