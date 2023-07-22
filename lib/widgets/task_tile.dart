@@ -56,10 +56,10 @@ class TaskTile extends ConsumerWidget {
             .difference(taskData.lastDone)
             .inDays -
         taskTypes[taskData.type]!);
-    final Color color = daysLeft.sign > 0
-        ? Colors.green.withOpacity(0.15)
-        : daysLeft.sign == 0
-            ? Colors.yellow.withOpacity(0.15)
+    final Color color = taskData.type == 'Dodatkowe' || daysLeft.sign == 0
+        ? Colors.yellow.withOpacity(0.15)
+        : daysLeft.sign > 0
+            ? Colors.green.withOpacity(0.15)
             : Colors.red.withOpacity(0.15);
     Widget textWidget = text ??
         RichText(

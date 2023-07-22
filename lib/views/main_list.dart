@@ -46,7 +46,7 @@ class MainListView extends ConsumerWidget {
                 }
                 final groupKey = groupKeys[index - 1];
                 return ExpansionTile(
-                  initiallyExpanded: true,
+                  initiallyExpanded: false,
                   title: Text(groupKey),
                   children: (tasksGrouped[groupKey] as List<Task>)
                       .map((Task task) => TaskTile(

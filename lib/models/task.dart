@@ -42,7 +42,7 @@ class Task {
       };
 }
 
-final taskTypes = {'Codzienne':1,'Co 2-3 dni':3, 'Co tydzień':7, 'Co 2 tygodnie': 14, 'Co miesiąc': 30, 'Dodatkowe':0};
+final taskTypes = {'Codzienne':1,'Co 2-3 dni':3, 'Co tydzień':7, 'Co 2 tygodnie': 14, 'Co miesiąc': 30, 'Dodatkowe':31};
 
 class AsyncTasksNotifier extends AsyncNotifier<List<Task>> {
   Future<List<Task>> _fetchTask() async {
